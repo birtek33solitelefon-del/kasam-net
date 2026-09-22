@@ -1,45 +1,351 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0f172a"><link rel="manifest" href="./manifest.webmanifest"><title>kasam.net</title>
-<style>
-:root{--bg:#f4f7fb;--card:#fff;--ink:#102a43;--muted:#64748b;--line:#dce5ef;--blue:#1769e0;--nav:#0f172a;--red:#c93c4b;--green:#138a5b;--shadow:0 8px 24px #102a4312}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px system-ui,-apple-system,Segoe UI,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 13px;font-weight:700}.primary{background:var(--blue);color:#fff}.ghost{background:#eef4ff;color:var(--ink);border:1px solid var(--line)}.danger{background:#fff0f2;color:var(--red)}.hidden{display:none!important}.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#0f172a,#1d4ed8);padding:20px}.login-box{width:min(420px,100%);background:#fff;border-radius:22px;padding:28px;box-shadow:var(--shadow)}.brand{font-size:34px;font-weight:900;letter-spacing:-2px}.muted{color:var(--muted)}.field{margin:0 0 13px}.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;margin-bottom:5px}.field input,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:var(--nav);color:#fff;padding:22px 16px;display:flex;flex-direction:column;gap:18px}.side .brand{font-size:23px}.user{background:#ffffff12;border-radius:12px;padding:12px}.nav{display:grid;gap:5px}.nav button{background:transparent;color:#dbe7fb;text-align:left}.nav button.active{background:var(--blue);color:#fff}.side-bottom{margin-top:auto;display:flex;gap:7px}.side-bottom button{flex:1}.main{padding:24px;max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin-bottom:18px}.top h1{margin:4px 0 0;font-size:clamp(25px,4vw,38px);letter-spacing:-1.5px}.top-tools{display:flex;gap:10px;align-items:end}.top-tools .field{margin:0}.quick{display:flex;gap:10px;background:#fff8e8;border:1px solid #f1d99a;border-left:5px solid #c48620;padding:10px;border-radius:12px;margin-bottom:18px}.quick input{flex:1;border:1px solid var(--line);border-radius:9px;padding:10px}.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}.metric,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.metric small{display:block;color:var(--muted);font-weight:800;text-transform:uppercase;font-size:11px}.metric strong{display:block;font-size:25px;margin-top:8px}.panel{margin-bottom:18px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel h2,.panel h3{margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:720px}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;text-transform:uppercase;color:var(--muted)}.actions{display:flex;gap:6px;flex-wrap:wrap}.mini{padding:7px 9px;font-size:12px}.badge{padding:4px 8px;border-radius:99px;font-size:11px;font-weight:800}.ok{background:#e7f7ef;color:var(--green)}.cancelled{background:#fff0f2;color:var(--red);text-decoration:line-through}.empty{text-align:center;color:var(--muted);padding:24px}.toast{position:fixed;right:18px;bottom:18px;background:var(--green);color:#fff;padding:13px 16px;border-radius:11px;z-index:5}.toast.err{background:var(--red)}.modal{position:fixed;inset:0;background:#0f172a99;display:grid;place-items:center;padding:18px;z-index:10}.modal-box{background:#fff;border-radius:18px;padding:20px;width:min(650px,100%);max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
-@media(max-width:800px){.app{display:block}.side{padding:15px}.nav{grid-template-columns:repeat(2,1fr)}.main{padding:16px}.quick{flex-direction:column}.top-tools{width:100%}.top-tools>*{flex:1}}
-</style></head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasam.net - Ön Muhasebe & Stok Sistemi</title>
+    <meta name="theme-color" content="#1e293b">
+    <style>
+        :root {
+            --bg: #f8fafc; --surface: #ffffff; --text: #0f172a; --text-light: #64748b;
+            --primary: #2563eb; --primary-hover: #1d4ed8;
+            --success: #16a34a; --danger: #dc2626; --border: #e2e8f0;
+            --sidebar-bg: #0f172a; --sidebar-text: #f8fafc;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a; --surface: #1e293b; --text: #f8fafc; --text-light: #94a3b8;
+            --border: #334155; --sidebar-bg: #020617;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sol Menü */
+        aside { width: 260px; background: var(--sidebar-bg); color: var(--sidebar-text); display: flex; flex-direction: column; }
+        .logo { padding: 1.25rem 1.5rem; font-size: 1.3rem; font-weight: 700; border-bottom: 1px solid #334155; display: flex; align-items: center; justify-content: space-between; }
+        .nav-menu { flex: 1; padding: 1rem 0; display: flex; flex-direction: column; gap: 0.25rem; }
+        .nav-item { padding: 0.8rem 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500; opacity: 0.75; transition: 0.2s; }
+        .nav-item:hover, .nav-item.active { opacity: 1; background: #334155; border-left: 4px solid var(--primary); }
+
+        /* Ana İçerik */
+        main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        header { background: var(--surface); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .header-actions { display: flex; gap: 0.5rem; align-items: center; }
+        
+        .content { flex: 1; padding: 1.5rem 2rem; overflow-y: auto; }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; }
+
+        /* Kartlar & Paneller */
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+        .card { background: var(--surface); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border); }
+        .card h3 { font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.4rem; }
+        .card .value { font-size: 1.6rem; font-weight: 700; }
+        .text-green { color: var(--success); } .text-red { color: var(--danger); }
+
+        .panel { background: var(--surface); padding: 1.25rem; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        
+        /* Formlar & Girdiler */
+        .form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.3rem; }
+        label { font-size: 0.8rem; font-weight: 600; color: var(--text-light); }
+        input, select { padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; background: var(--bg); color: var(--text); outline: none; }
+        input:focus, select:focus { border-color: var(--primary); }
+        
+        /* Butonlar */
+        .btn { padding: 0.55rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-danger { background: var(--danger); color: white; padding: 0.35rem 0.7rem; font-size: 0.8rem; }
+        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+        .btn-outline:hover { background: var(--bg); }
+
+        /* Tablolar & Arama */
+        .search-box { width: 100%; max-width: 300px; margin-bottom: 1rem; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        th { color: var(--text-light); font-weight: 600; background: var(--bg); }
+        tr:hover { background: var(--bg); }
+
+        #toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: var(--surface); padding: 0.8rem 1.2rem; border-radius: 8px; transform: translateX(180%); transition: transform 0.3s ease; z-index: 1000; font-weight: 500; }
+        #toast.show { transform: translateX(0); }
+
+        @media print {
+            aside, header, form, .action-cell, .search-box { display: none !important; }
+            body, main, .content { height: auto; overflow: visible; background: white; color: black; }
+            .panel { border: none; padding: 0; }
+        }
+        
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            aside { width: 100%; flex-direction: row; }
+            .logo { display: none; }
+            .nav-menu { flex-direction: row; overflow-x: auto; }
+            .nav-item { border-left: none; border-bottom: 3px solid transparent; white-space: nowrap; }
+            .nav-item.active { border-bottom: 3px solid var(--primary); background: transparent; }
+        }
+    </style>
+</head>
 <body>
-<div id="login" class="login"><div class="login-box"><div class="brand">₺ kasam.net</div><p class="muted">Kolay, güvenli, şube bazlı ön muhasebe</p><div class="field"><label>Kullanıcı adı</label><input id="loginUser" value="admin"></div><div class="field"><label>Şifre</label><input id="loginPass" type="password" value="admin123"></div><button class="primary" style="width:100%" id="loginBtn">Giriş Yap</button><p class="muted" style="font-size:12px;margin-bottom:0">Demo: admin/admin123 · soli/soli123 · cagdaskent/cagdas123</p></div></div>
-<div id="app" class="app hidden"><aside class="side"><div class="brand">₺ kasam.net</div><div class="user"><b id="who"></b><br><small id="role"></small></div><nav id="nav" class="nav"></nav><div class="side-bottom"><button class="ghost" id="backupBtn">Yedek</button><button class="danger" id="logoutBtn">Çıkış</button></div></aside><main class="main"><header class="top"><div><div class="muted">KASAM.NET</div><h1 id="title">Genel Bakış</h1></div><div class="top-tools"><div class="field"><label>Tarih</label><input type="date" id="date"></div><div class="field" id="branchWrap"></div></div></header><div class="quick"><input id="quick" placeholder="Örnek: Ahmet'e 2.200 TL ödeme yaptım"><button class="primary" id="quickBtn">Hızlı İşlem</button></div><section id="content"></section></main></div>
-<div id="modal" class="modal hidden"><div class="modal-box"><div class="modal-head"><h2 id="modalTitle">Kayıt düzenle</h2><button class="ghost" id="closeModal">Kapat</button></div><div id="modalBody"></div></div></div><div id="toast" class="toast hidden"></div>
-<script>
-'use strict';
-const KEY='kasamNetProV1',SESSION='kasamNetProSession',BRANCHES=['Soli','Çağdaşkent'];
-const users=[['admin','admin123','Yönetici','admin',null],['soli','soli123','Soli Şube','branch','Soli'],['cagdaskent','cagdas123','Çağdaşkent Şube','branch','Çağdaşkent']];
-const menus={dashboard:'Genel Bakış',employees:'Personel',customers:'Müşteriler',sales:'Satışlar',materials:'Stok',cash:'Kasa',pos:'Cep POS',reports:'Raporlar'};
-let user=null,page='dashboard',branch='all',date=new Date().toISOString().slice(0,10),editing=null;
-const blank={employees:[],customers:[],sales:[],materials:[],cash:[],pos:[],audit:[]};
-function id(){return crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random()}
-function load(){try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x)return {...blank,...x}}catch{}return {...blank}}
-function save(x){localStorage.setItem(KEY,JSON.stringify(x))}
-function esc(x){return String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function money(x){return new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(Number(x)||0)}
-function toast(s,e=false){const x=document.getElementById('toast');x.textContent=s;x.classList.toggle('err',e);x.classList.remove('hidden');setTimeout(()=>x.classList.add('hidden'),2500)}
-function scope(){return user?.role==='branch'?user.branch:(branch==='all'?null:branch)}
-function rows(key){const db=load(),s=scope();return (db[key]||[]).map((x,i)=>({...x,_index:i})).filter(x=>!s||x.branch===s)}
-function addAudit(action){const db=load();db.audit.unshift({id:id(),date,user:user?.name||'Sistem',action});save(db)}
-function nav(){document.getElementById('nav').innerHTML=Object.entries(menus).map(([k,v])=>`<button class="${k===page?'active':''}" data-page="${k}">${v}</button>`).join('')}
-function header(){document.getElementById('title').textContent=menus[page];document.getElementById('date').value=date;document.getElementById('date').onchange=e=>{date=e.target.value;render()};const w=document.getElementById('branchWrap');w.innerHTML=user.role==='branch'?`<label>Şube</label><div>${esc(user.branch)}</div>`:`<label>Şube</label><select id="branch"><option value="all">Tüm Şubeler</option>${BRANCHES.map(x=>`<option>${x}</option>`).join('')}</select>`;if(document.getElementById('branch')){document.getElementById('branch').value=branch;document.getElementById('branch').onchange=e=>{branch=e.target.value;render()}}}
-function table(head,body){return `<div class="table-wrap"><table><thead><tr>${head.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${body||`<tr><td colspan="${head.length}" class="empty">Kayıt bulunamadı.</td></tr>`}</tbody></table></div>`}
-function actionButtons(key,index,status){if(status==='iptal')return `<span class="badge cancelled">İPTAL</span>`;return `<div class="actions"><button class="ghost mini" data-edit="${key}" data-index="${index}">Düzenle</button><button class="danger mini" data-cancel="${key}" data-index="${index}">İptal</button></div>`}
-function dashboard(){const s=rows('sales'),c=rows('cash'),m=rows('materials');const sale=s.reduce((a,x)=>a+Number(x.total||0),0),net=c.reduce((a,x)=>a+(x.type==='giriş'?1:-1)*Number(x.amount||0),0),stock=m.reduce((a,x)=>a+Number(x.qty||0)*Number(x.cost||0),0);return `<div class="metrics"><div class="metric"><small>Satış</small><strong>${money(sale)}</strong></div><div class="metric"><small>Kasa net</small><strong>${money(net)}</strong></div><div class="metric"><small>Stok değeri</small><strong>${money(stock)}</strong></div><div class="metric"><small>Aktif kayıt</small><strong>${s.length+c.length+m.length}</strong></div></div><div class="panel"><div class="panel-head"><h3>Son satışlar</h3><button class="ghost" data-page="sales">Satış ekle</button></div>${table(['Tarih','Müşteri','Şube','Tutar','Durum','İşlem'],s.slice(-8).reverse().map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.customer)}</td><td>${esc(x.branch)}</td><td>${money(x.total)}</td><td>${x.status==='iptal'?'<span class="badge cancelled">İPTAL</span>':'<span class="badge ok">Aktif</span>'}</td><td>${actionButtons('sales',x._index,x.status)}</td></tr>`).join(''))}</div>`}
-function formFor(key){const common=`<div class="field"><label>Şube</label><select id="fBranch">${BRANCHES.map(x=>`<option>${x}</option>`).join('')}</select></div>`;if(key==='employees')return `<div class="field"><label>Ad soyad</label><input id="fName"></div><div class="field"><label>Görev</label><input id="fRole"></div><div class="field"><label>Telefon</label><input id="fPhone"></div>${common}`;if(key==='customers')return `<div class="field"><label>Ad soyad / Firma</label><input id="fName"></div><div class="field"><label>Telefon</label><input id="fPhone"></div><div class="field"><label>Not</label><input id="fNote"></div>${common}`;if(key==='sales')return `<div class="field"><label>Müşteri</label><input id="fCustomer"></div><div class="field"><label>Ürün</label><input id="fProduct"></div><div class="field"><label>Toplam</label><input id="fAmount" type="number" step="0.01"></div><div class="field"><label>Ödeme</label><select id="fPayment"><option>Nakit</option><option>Kart</option><option>Veresiye</option></select></div>${common}`;if(key==='materials')return `<div class="field"><label>Ürün</label><input id="fProduct"></div><div class="field"><label>Miktar</label><input id="fQty" type="number" step="0.01"></div><div class="field"><label>Maliyet</label><input id="fCost" type="number" step="0.01"></div>${common}`;if(key==='cash')return `<div class="field"><label>Tür</label><select id="fType"><option>giriş</option><option>çıkış</option></select></div><div class="field"><label>Tutar</label><input id="fAmount" type="number" step="0.01"></div><div class="field"><label>Not</label><input id="fNote"></div>${common}`;return `<div class="field"><label>İşlem / kişi</label><input id="fName"></div><div class="field"><label>Tutar</label><input id="fAmount" type="number" step="0.01"></div><div class="field"><label>Not</label><input id="fNote"></div>${common}`}
-function listPage(key,title){const list=rows(key);let head=['Tarih','Şube','İçerik','Tutar / Miktar','Durum','İşlem'];let body=list.map(x=>{let content=x.name||x.customer||x.product||x.note||x.person||'-',amount=x.total??x.amount??x.qty??0;return `<tr><td>${esc(x.date)}</td><td>${esc(x.branch)}</td><td>${esc(content)}</td><td>${money(amount)}</td><td>${x.status==='iptal'?'<span class="badge cancelled">İPTAL</span>':'<span class="badge ok">Aktif</span>'}</td><td>${actionButtons(key,x._index,x.status)}</td></tr>`}).join('');return `<div class="panel"><div class="panel-head"><h3>${title} ekle</h3><button class="primary" data-new="${key}">Yeni kayıt</button></div><p class="muted">Düzenle kaydı günceller. İptal kaydı silmeden geçmişte tutar.</p></div><div class="panel"><div class="panel-head"><h3>${title} listesi</h3></div>${table(head,body)}</div>`}
-function reports(){const db=load();return `<div class="panel"><div class="panel-head"><h3>Rapor ve yedek</h3></div><div class="actions"><button class="primary" id="download">JSON yedek indir</button><button class="danger" id="reset">Demo verisini sıfırla</button></div></div><div class="panel">${table(['Tarih','Kullanıcı','İşlem'],(db.audit||[]).slice(0,30).map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.user)}</td><td>${esc(x.action)}</td></tr>`).join(''))}</div>`}
-function render(){nav();header();document.getElementById('content').innerHTML=page==='dashboard'?dashboard():page==='reports'?reports():listPage(page,menus[page]);bind()}
-function openRecord(key,index){const db=load(),r=db[key]?.[index];if(!r)return toast('Kayıt bulunamadı',true);editing={key,index};document.getElementById('modalTitle').textContent='Kayıt düzenle';document.getElementById('modalBody').innerHTML=`<div class="grid">${formFor(key)}</div><button class="primary" id="saveEdit">Değişiklikleri kaydet</button>`;const formIds=['fName','fRole','fPhone','fNote','fCustomer','fProduct','fAmount','fPayment','fQty','fCost','fType','fBranch'];formIds.forEach(k=>{const el=document.getElementById(k);if(el&&r[k]!==undefined)el.value=r[k]});document.getElementById('modal').classList.remove('hidden');document.getElementById('saveEdit').onclick=()=>{const next={...r};formIds.forEach(k=>{const el=document.getElementById(k);if(el)next[k]=el.type==='number'?Number(el.value||0):el.value});next.updatedAt=new Date().toISOString();db[key][index]=next;save(db);addAudit(`${menus[key]} kaydı düzenlendi`);closeModal();render();toast('Kayıt güncellendi')}}
-function closeModal(){document.getElementById('modal').classList.add('hidden');editing=null}
-function newRecord(key){editing=null;document.getElementById('modalTitle').textContent=`Yeni ${menus[key]} kaydı`;document.getElementById('modalBody').innerHTML=`<div class="grid">${formFor(key)}</div><button class="primary" id="saveNew">Kaydet</button>`;document.getElementById('modal').classList.remove('hidden');document.getElementById('saveNew').onclick=()=>{const db=load(),r={id:id(),date,branch:document.getElementById('fBranch').value,status:'aktif'};document.querySelectorAll('#modalBody input,#modalBody select').forEach(el=>{if(el.id!=='fBranch')r[el.id.slice(1)]=el.type==='number'?Number(el.value||0):el.value});db[key].push(r);save(db);addAudit(`${menus[key]} kaydı eklendi`);closeModal();render();toast('Kayıt kaydedildi')}}
-function cancelRecord(key,index){const db=load(),r=db[key]?.[index];if(!r)return toast('Kayıt bulunamadı',true);if(!confirm('Kayıt iptal edilsin mi? Silinmeyecek ve geçmiş korunacak.'))return;r.status='iptal';r.cancelledAt=new Date().toISOString();db[key][index]=r;save(db);addAudit(`${menus[key]} kaydı iptal edildi`);render();toast('Kayıt iptal edildi')}
-function bind(){document.querySelectorAll('[data-page]').forEach(x=>x.onclick=()=>{page=x.dataset.page;render()});document.querySelectorAll('[data-edit]').forEach(x=>x.onclick=()=>openRecord(x.dataset.edit,Number(x.dataset.index)));document.querySelectorAll('[data-cancel]').forEach(x=>x.onclick=()=>cancelRecord(x.dataset.cancel,Number(x.dataset.index)));document.querySelectorAll('[data-new]').forEach(x=>x.onclick=()=>newRecord(x.dataset.new));const d=document.getElementById('download');if(d)d.onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(load(),null,2)],{type:'application/json'}));a.download='kasam-net-yedek.json';a.click()};const r=document.getElementById('reset');if(r)r.onclick=()=>{if(confirm('Tüm yerel demo verisi sıfırlansın mı?')){localStorage.removeItem(KEY);render();toast('Veri sıfırlandı')}}}
-function boot(){document.getElementById('login').classList.add('hidden');document.getElementById('app').classList.remove('hidden');document.getElementById('who').textContent=user.name;document.getElementById('role').textContent=user.role==='admin'?'Yönetici':user.branch;render()}
-document.getElementById('loginBtn').onclick=()=>{const u=users.find(x=>x[0]===document.getElementById('loginUser').value.trim()&&x[1]===document.getElementById('loginPass').value);if(!u)return toast('Kullanıcı adı veya şifre hatalı',true);user={username:u[0],name:u[2],role:u[3],branch:u[4]};localStorage.setItem(SESSION,JSON.stringify(user));boot()};document.getElementById('logoutBtn').onclick=()=>{localStorage.removeItem(SESSION);location.reload()};document.getElementById('closeModal').onclick=closeModal;document.getElementById('backupBtn').onclick=()=>{document.querySelector('[data-page="reports"]')?.click()};document.getElementById('quickBtn').onclick=()=>{const t=document.getElementById('quick').value.trim(),m=t.match(/([\d.,]+)\s*(?:tl|₺)/i);if(!m)return toast('Tutar bulunamadı. Örnek: Ahmet 2200 TL ödeme',true);const db=load(),amount=Number(m[1].replace(/\./g,'').replace(',','.')),low=t.toLocaleLowerCase('tr-TR'),person=(db.employees||[]).find(x=>low.includes(String(x.name).toLocaleLowerCase('tr-TR')));if(!person)return toast('Personel adı bulunamadı',true);db.cash.push({id:id(),date,branch:person.branch,type:low.includes('çıkış')?'çıkış':'çıkış',amount,note:t,status:'aktif'});save(db);addAudit('Hızlı işlem kaydedildi');document.getElementById('quick').value='';render();toast('Hızlı işlem kaydedildi')};try{user=JSON.parse(localStorage.getItem(SESSION)||'null')}catch{}if(user)boot();
-</script></body></html>
+
+    <aside>
+        <div class="logo">₺ Kasam.net</div>
+        <div class="nav-menu">
+            <div class="nav-item active" onclick="navigate('dashboard')">📊 Özet</div>
+            <div class="nav-item" onclick="navigate('kasa')">💵 Kasa</div>
+            <div class="nav-item" onclick="navigate('stok')">📦 Stok</div>
+            <div class="nav-item" onclick="navigate('cari')">🤝 Cari</div>
+            <div class="nav-item" onclick="navigate('personel')">👥 Personel</div>
+        </div>
+    </aside>
+
+    <main>
+        <header>
+            <h2 id="pageTitle">Özet Tablo</h2>
+            <div class="header-actions">
+                <button class="btn btn-outline" onclick="toggleTheme()">🌓 Gece/Gündüz</button>
+                <button class="btn btn-outline" onclick="window.print()">🖨️ Yazdır/PDF</button>
+                <button class="btn btn-outline" onclick="exportData()">💾 Yedek Al</button>
+                <input type="file" id="importFile" style="display:none" accept=".json" onchange="importData(event)">
+                <button class="btn btn-primary" onclick="document.getElementById('importFile').click()">📂 Geri Yükle</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- DASHBOARD -->
+            <div id="dashboard" class="tab-pane active">
+                <div class="grid-cards">
+                    <div class="card"><h3>Toplam Gelir</h3><div class="value text-green" id="dashGelir">₺0,00</div></div>
+                    <div class="card"><h3>Toplam Gider</h3><div class="value text-red" id="dashGider">₺0,00</div></div>
+                    <div class="card"><h3>Net Kasa Bakiyesi</h3><div class="value" id="dashBakiye">₺0,00</div></div>
+                    <div class="card"><h3>Kayıtlı Ürün Kalemi</h3><div class="value" id="dashStok">0</div></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Son Kasa Hareketleri</h3></div>
+                    <table>
+                        <thead><tr><th>Tarih</th><th>Açıklama</th><th>Tutar</th></tr></thead>
+                        <tbody id="sonIslemlerTablo"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- KASA -->
+            <div id="kasa" class="tab-pane">
+                <div class="panel">
+                    <div class="panel-header"><h3>Gelir / Gider Kaydı</h3></div>
+                    <form onsubmit="addKasa(event)">
+                        <div class="form-row">
+                            <div class="input-group"><label>Açıklama</label><input type="text" id="kasaDesc" required placeholder="Örn: Müşteri Ödemesi"></div>
+                            <div class="input-group"><label>Tutar (₺)</label><input type="number" step="0.01" id="kasaAmount" required placeholder="0.00"></div>
+                            <div class="input-group"><label>İşlem Tipi</label>
+                                <select id="kasaType"><option value="gelir">Gelir (+)</option><option value="gider">Gider (-)</option></select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Kasa Defteri</h3></div>
+                    <input type="text" class="search-box" placeholder="İşlem Ara..." onkeyup="filterTable('kasaTablo', this.value)">
+                    <table>
+                        <thead><tr><th>Tarih</th><th>Açıklama</th><th>Tip</th><th>Tutar</th><th class="action-cell">İşlem</th></tr></thead>
+                        <tbody id="kasaTablo"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- STOK -->
+            <div id="stok" class="tab-pane">
+                <div class="panel">
+                    <div class="panel-header"><h3>Ürün Kartı Ekle</h3></div>
+                    <form onsubmit="addStok(event)">
+                        <div class="form-row">
+                            <div class="input-group"><label>Ürün Adı</label><input type="text" id="stokName" required></div>
+                            <div class="input-group"><label>Mevcut Adet</label><input type="number" id="stokQty" required></div>
+                            <div class="input-group"><label>Birim Fiyatı (₺)</label><input type="number" step="0.01" id="stokPrice" required></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ürün Ekle</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Stok Listesi</h3></div>
+                    <input type="text" class="search-box" placeholder="Ürün Ara..." onkeyup="filterTable('stokTablo', this.value)">
+                    <table>
+                        <thead><tr><th>Ürün Adı</th><th>Miktar</th><th>Birim Fiyat</th><th>Toplam Değer</th><th class="action-cell">İşlem</th></tr></thead>
+                        <tbody id="stokTablo"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CARİ -->
+            <div id="cari" class="tab-pane">
+                <div class="panel">
+                    <div class="panel-header"><h3>Müşteri / Tedarikçi Ekle</h3></div>
+                    <form onsubmit="addCari(event)">
+                        <div class="form-row">
+                            <div class="input-group"><label>Unvan / Ad Soyad</label><input type="text" id="cariName" required></div>
+                            <div class="input-group"><label>Telefon</label><input type="text" id="cariPhone"></div>
+                            <div class="input-group"><label>Başlangıç Bakiyesi (₺)</label><input type="number" step="0.01" id="cariBalance" value="0"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cari Kaydet</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Cari Listesi</h3></div>
+                    <input type="text" class="search-box" placeholder="Müşteri Ara..." onkeyup="filterTable('cariTablo', this.value)">
+                    <table>
+                        <thead><tr><th>Unvan</th><th>Telefon</th><th>Bakiye</th><th class="action-cell">İşlem</th></tr></thead>
+                        <tbody id="cariTablo"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PERSONEL -->
+            <div id="personel" class="tab-pane">
+                <div class="panel">
+                    <div class="panel-header"><h3>Personel Ekle</h3></div>
+                    <form onsubmit="addPersonel(event)">
+                        <div class="form-row">
+                            <div class="input-group"><label>Ad Soyad</label><input type="text" id="perName" required></div>
+                            <div class="input-group"><label>Görevi</label><input type="text" id="perRole"></div>
+                            <div class="input-group"><label>Aylık Maaş (₺)</label><input type="number" step="0.01" id="perSalary" required></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Personel Kaydet</button>
+                    </form>
+                </div>
+                <div class="panel">
+                    <div class="panel-header"><h3>Personel Listesi</h3></div>
+                    <table>
+                        <thead><tr><th>Ad Soyad</th><th>Görev</th><th>Maaş</th><th class="action-cell">İşlem</th></tr></thead>
+                        <tbody id="personelTablo"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="toast"></div>
+
+    <script>
+        const DB_KEY = 'kasam_db_v4';
+        let db = JSON.parse(localStorage.getItem(DB_KEY)) || { kasa: [], stok: [], cari: [], personel: [] };
+
+        function saveDB() { localStorage.setItem(DB_KEY, JSON.stringify(db)); render(); }
+        const formatMoney = (n) => new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(n || 0);
+        const genId = () => Date.now().toString(36) + Math.random().toString(36).substr(2, 4);
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg; t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2500);
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const newTheme = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+        }
+
+        function navigate(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            const titles = { dashboard: 'Özet Tablo', kasa: 'Kasa Defteri', stok: 'Stok Yönetimi', cari: 'Cari Hesaplar', personel: 'Personel Yönetimi' };
+            document.getElementById('pageTitle').innerText = titles[tabId];
+        }
+
+        function filterTable(tableId, query) {
+            const rows = document.querySelectorAll(`#${tableId} tr`);
+            query = query.toLowerCase();
+            rows.forEach(r => {
+                r.style.display = r.innerText.toLowerCase().includes(query) ? '' : 'none';
+            });
+        }
+
+        function addKasa(e) {
+            e.preventDefault();
+            db.kasa.push({ id: genId(), date: new Date().toLocaleDateString('tr-TR'), desc: document.getElementById('kasaDesc').value, amount: parseFloat(document.getElementById('kasaAmount').value), type: document.getElementById('kasaType').value });
+            e.target.reset(); saveDB(); showToast('Kasa işlemi kaydedildi.');
+        }
+
+        function addStok(e) {
+            e.preventDefault();
+            db.stok.push({ id: genId(), name: document.getElementById('stokName').value, qty: parseInt(document.getElementById('stokQty').value), price: parseFloat(document.getElementById('stokPrice').value) });
+            e.target.reset(); saveDB(); showToast('Ürün eklendi.');
+        }
+
+        function addCari(e) {
+            e.preventDefault();
+            db.cari.push({ id: genId(), name: document.getElementById('cariName').value, phone: document.getElementById('cariPhone').value, balance: parseFloat(document.getElementById('cariBalance').value) });
+            e.target.reset(); saveDB(); showToast('Cari eklendi.');
+        }
+
+        function addPersonel(e) {
+            e.preventDefault();
+            db.personel.push({ id: genId(), name: document.getElementById('perName').value, role: document.getElementById('perRole').value, salary: parseFloat(document.getElementById('perSalary').value) });
+            e.target.reset(); saveDB(); showToast('Personel eklendi.');
+        }
+
+        function deleteItem(table, id) {
+            if(confirm('Silmek istediğinize emin misiniz?')) {
+                db[table] = db[table].filter(i => i.id !== id);
+                saveDB(); showToast('Kayıt silindi.');
+            }
+        }
+
+        function render() {
+            let g = db.kasa.filter(k => k.type === 'gelir').reduce((a, b) => a + b.amount, 0);
+            let gd = db.kasa.filter(k => k.type === 'gider').reduce((a, b) => a + b.amount, 0);
+
+            document.getElementById('dashGelir').innerText = formatMoney(g);
+            document.getElementById('dashGider').innerText = formatMoney(gd);
+            document.getElementById('dashBakiye').innerText = formatMoney(g - gd);
+            document.getElementById('dashStok').innerText = db.stok.length;
+
+            document.getElementById('sonIslemlerTablo').innerHTML = db.kasa.slice(-5).reverse().map(k => `
+                <tr><td>${k.date}</td><td>${k.desc}</td><td class="${k.type === 'gelir' ? 'text-green' : 'text-red'}">${k.type==='gelir'?'+':'-'}${formatMoney(k.amount)}</td></tr>
+            `).join('') || '<tr><td colspan="3">İşlem yok.</td></tr>';
+
+            document.getElementById('kasaTablo').innerHTML = db.kasa.slice().reverse().map(k => `
+                <tr><td>${k.date}</td><td>${k.desc}</td><td><b>${k.type.toUpperCase()}</b></td><td style="font-weight:bold">${formatMoney(k.amount)}</td>
+                <td class="action-cell"><button class="btn btn-danger" onclick="deleteItem('kasa', '${k.id}')">Sil</button></td></tr>
+            `).join('');
+
+            document.getElementById('stokTablo').innerHTML = db.stok.map(s => `
+                <tr><td>${s.name}</td><td>${s.qty} Adet</td><td>${formatMoney(s.price)}</td><td style="font-weight:bold">${formatMoney(s.qty * s.price)}</td>
+                <td class="action-cell"><button class="btn btn-danger" onclick="deleteItem('stok', '${s.id}')">Sil</button></td></tr>
+            `).join('');
+
+            document.getElementById('cariTablo').innerHTML = db.cari.map(c => `
+                <tr><td><b>${c.name}</b></td><td>${c.phone || '-'}</td><td style="font-weight:bold">${formatMoney(c.balance)}</td>
+                <td class="action-cell"><button class="btn btn-danger" onclick="deleteItem('cari', '${c.id}')">Sil</button></td></tr>
+            `).join('');
+
+            document.getElementById('personelTablo').innerHTML = db.personel.map(p => `
+                <tr><td><b>${p.name}</b></td><td>${p.role || '-'}</td><td style="font-weight:bold">${formatMoney(p.salary)}</td>
+                <td class="action-cell"><button class="btn btn-danger" onclick="deleteItem('personel', '${p.id}')">Sil</button></td></tr>
+            `).join('');
+        }
+
+        function exportData() {
+            const blob = new Blob([JSON.stringify(db)], { type: 'application/json' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+            a.download = `kasam_yedek_${new Date().toISOString().slice(0,10)}.json`; a.click();
+        }
+
+        function importData(e) {
+            const file = e.target.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                try { db = JSON.parse(evt.target.result); saveDB(); showToast('Veriler yüklendi!'); }
+                catch (err) { alert('Hata: Geçersiz yedek dosyası!'); }
+            };
+            reader.readAsText(file);
+        }
+
+        window.onload = render;
+    </script>
+</body>
+</html>
