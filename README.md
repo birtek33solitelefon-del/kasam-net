@@ -1,17 +1,31 @@
 # kasam.net
 
-Mobil uyumlu, yerel ön muhasebe başlangıç uygulaması.
+Mobil uyumlu, yerel ön muhasebe uygulaması.
 
-## Kullanım
+## Canlı adres
 
-- `index.html` dosyasını açın veya GitHub Pages/Vercel ile yayınlayın.
-- Demo girişleri: `admin / admin123`, `soli / soli123`, `cagdaskent / cagdas123`.
-- Yönetici iki şubeyi görür; şube kullanıcıları yalnızca kendi şubesini görür.
-- Tarih seçerek eski kayıt girebilirsiniz.
-- Personel ve müşteri kartı oluşturup hesap hareketi, ödeme ve tahsilat ekleyebilirsiniz.
-- Raporlar ekranından yazdırma penceresiyle PDF kaydedebilir, JSON yedek indirebilirsiniz.
-- Telefon tarayıcısında “Ana ekrana ekle” ile uygulama gibi kullanılabilir.
+https://birtek33solitelefon-del.github.io/kasam-net/
 
-## Önemli
+## Mevcut özellikler
 
-Bu ilk yayın sürümü verileri tarayıcının localStorage alanında tutar; cihazlar arasında otomatik senkronizasyon ve gerçek sunucu tarafı yetkilendirme henüz bağlı değildir. Üretim kullanımı için Supabase Auth/Postgres ve sunucu tarafı AI anahtarı eklenmelidir. NVIDIA/API anahtarını HTML içine koymayın.
+- Yönetici ve şube kullanıcıları
+- Soli ve Çağdaşkent şube filtresi
+- Personel ve müşteri kartları
+- Personel ödeme/hakediş ve müşteri tahsilat/veresiye hareketleri
+- Satış, malzeme, kasa, Cep POS, kurye ve reçete/maliyet ekranları
+- Tarih seçimi, yazdırılabilir rapor ve JSON yedekleme
+- PWA manifesti ve service worker
+
+## Demo girişleri
+
+- `admin / admin123`
+- `soli / soli123`
+- `cagdaskent / cagdas123`
+
+## Önemli güvenlik notu
+
+Bu sürüm GitHub Pages üzerinde statik çalışır ve verileri tarayıcı `localStorage` alanında tutar. Bu nedenle cihazlar arasında otomatik senkronizasyon ve gerçek sunucu tarafı yetkilendirme yoktur. Gerçek üretim için Supabase/Auth/Postgres ve şube bazlı RLS ayrıca kurulmalıdır. Gizli API anahtarlarını frontend'e veya bu repository'ye eklemeyin.
+
+## Yayın
+
+GitHub Pages kaynağı `main` dalı ve kök klasör olarak ayarlanmıştır. `main` dalına gönderilen değişiklikler Pages tarafından yayınlanır. Yayının tamamlanması birkaç dakika sürebilir.
