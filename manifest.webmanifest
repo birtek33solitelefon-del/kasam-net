@@ -1,1 +1,20 @@
-{"name":"kasam.net","short_name":"kasam.net","start_url":"./index.html","display":"standalone","background_color":"#f4f7fb","theme_color":"#102a43","lang":"tr","icons":[]}
+{
+  "name": "kasam.net Ön Muhasebe",
+  "short_name": "kasam.net",
+  "description": "Mobil ön muhasebe, stok, kasa ve şube takip uygulaması",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#102a43",
+  "lang": "tr-TR",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
