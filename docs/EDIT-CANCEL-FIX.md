@@ -1,17 +1,9 @@
-# Edit / İptal düzeltmesi
+# Düzenle / İptal düzeltmesi
 
-`edit-cancel-repair.js` legacy statik arayüz için güvenli bir onarım katmanıdır.
+Düzenle ve İptal onarım katmanı eklendi. Service Worker v4, legacy `index.html` içine `edit-cancel-repair.js` dosyasını otomatik olarak ekler; böylece ana dosyanın tamamını yeniden yazmadan güncel arayüzde çalışır.
 
-- Düzenleme mevcut kaydı günceller.
+- Düzenle mevcut localStorage kaydını günceller.
 - İptal kaydı silmez; `status: iptal`, `cancelledAt` ve `iptalTarihi` alanlarını ekler.
-- Değişiklikler `kasamNetV1` localStorage verisine yazılır.
-- Service Worker v3 eski önbelleği temizleyip onarım dosyasını cache'ler.
+- Eski cache sürümleri silinip v4 cache kullanılmaya başlanır.
 
-## Güncelleme görünmüyorsa
-
-1. Canlı siteyi açın.
-2. Android Chrome'da site ayarlarından önbelleği temizleyin.
-3. Siteyi tamamen kapatıp tekrar açın.
-4. Gerekirse gizli sekmede deneyin.
-
-Gerçek sunucu veritabanı kullanılmadığı için bu onarım yalnızca aynı cihaz ve tarayıcıdaki localStorage kayıtlarını etkiler.
+Güncelleme görünmezse siteyi kapatın, Chrome site ayarlarından cache'i temizleyin ve canlı adresi yeniden açın.
